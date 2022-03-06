@@ -23,13 +23,7 @@
             </v-app-bar>
         </div>
         <v-container>
-            <v-row>
-                <v-col>
-                    <v-sheet class="shopping-list" class="mt-5">
-                        <shop class="largeItem" @add-to-wish-list="addToWishList" @add-to-cart="addToCart"></shop>
-                    </v-sheet>
-                </v-col>
-            </v-row>
+            <shop class="largeItem" @add-to-wish-list="addToWishList" @add-to-cart="addToCart"></shop>
         </v-container>
     </div>
 

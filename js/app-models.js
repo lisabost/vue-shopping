@@ -31,9 +31,11 @@ class Book extends ShopItem{
 }
 
 class Bookmark extends ShopItem{
+    material;
 
-    constructor(id, title, description, price, numInStock, image, numInCart) {
+    constructor(id, title, description, price, numInStock, image, numInCart, material) {
         super(id, title, description, price, numInStock, image, numInCart);
+        this.material = material;
     }
 }
 
@@ -42,7 +44,7 @@ class Movie extends ShopItem{
     format;
 
     constructor(id, title, description, price, numInStock, image, numInCart, runtime, format) {
-        super(id, title, description, price, numInStock, image);
+        super(id, title, description, price, numInStock, image, numInCart);
         this.runtime = runtime;
         this.format = format;
     }

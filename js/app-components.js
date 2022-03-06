@@ -27,10 +27,19 @@ const ShopComponent = Vue.component('Shop', {
                     10.29, 10, 'images/owlmoon.jpg', 0),
                 new Book(12, 'The True Story of the Three Little Pigs', 'A retelling of the three little pigs from the point of view of the wolf', 'Jon Scieszka',
                     7.99, 10, 'images/pigs.jpg', 0),
-                new Bookmark(13,'Fractals Bookmark Set', 'A set of 12 bookmarks with fractal designs', 4.99, 8, 'images/fractal-bookmarks.jpg', 0),
-                new Bookmark(14, 'Fantasy Bookmark Set', 'A set of 12 fantasy themed bookmarks', '5.99', 9, 'images/fantasy-bookmarks.jpg', 0),
+                new Bookmark(13,'Fractals Bookmark Set', 'A set of 12 bookmarks with fractal designs', 4.99, 8, 'images/fractal-bookmarks.jpg',
+                    0, 'card-stock'),
+                new Bookmark(14, 'Fantasy Bookmark Set', 'A set of 12 fantasy themed bookmarks', '5.99', 9, 'images/fantasy-bookmarks.jpg',
+                    0, 'card-stock'),
                 new Bookmark(15, 'Dr. Seuss Bookmark Set', 'A set of 8 bookmarks with images from Dr. Seuss books', 7.99, 10, 'images/seuss-bookmarks.jpg',
-                    0),
+                    0, 'card-stock'),
+                new Movie(16, 'Moana', 'An adventurous teenager sails out on a daring mission to save her people.', 19.99, 7, 'images/moana.jpg',
+                    0, 105, 'DVD/BLU-RAY'),
+                new Movie(17, 'Encanto', 'A Columbian girl has to face the frustration of being the only member of her family without magical powers.', 24.99, 8,
+                    'images/encanto.jpg', 0, 102, 'DVD/BLU-RAY'),
+                new Movie(18, 'Frozen', 'When the newly crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter,' +
+                    'her sister Anna teams up with a mountain man, his playful reindeer, and a snowman to change the weather conditions.', 19.99, 6, 'images/frozen.jpg',
+                    0, 102, 'DVD/BLU-RAY')
             ]
         }
     },
@@ -45,16 +54,48 @@ const ShopComponent = Vue.component('Shop', {
 });
 
 
-Vue.component('SaleItem', {
-    data: function () {
-        return {
-            dialog: false,
-        }
-    },
+const SaleItemComponent = Vue.component('SaleItem', {
     props: {
         item: {
             type: ShopItem
         },
+    },
+    methods: {
+
+    },
+    template:`
+<div data-app>
+    <v-card class="mx-auto my-12 item-card" max-width="374">
+        <v-img height="250px" width="350px" :src="item.image"></v-img>
+        <v-card-title><span class="title">{{item.title}}</span></v-card-title>
+        <v-card-text>
+            <v-row align="center" class="mx-0">
+                <div class="grey--text ms-4"></div>
+            </v-row>
+            <div class="my-4 text-subtitle-1">{{item.author}}</div>
+            <div></div>
+        </v-card-text>
+        <v-card-title>$ {{item.price}}</v-card-title>
+        <v-card-subtitle>In Stock: {{item.numInStock}}</v-card-subtitle>
+        <v-card-text> </v-card-text>
+        <v-card-actions>
+            <template>
+                <v-row justify="center">
+                    <product-details :item="item" @add-to-cart="theItemEmitted => $emit('add-to-cart', theItemEmitted)" 
+                            @add-to-wish-list="theItemEmitted => $emit('add-to-wish-list', theItemEmitted)"></product-details>
+                </v-row>
+            </template>
+        </v-card-actions>
+    </v-card>
+</div>`
+});
+
+Vue.component('ProductDetails', {
+    data: function () {
+        return { dialog: false,}
+    },
+    props: {
+        item: ShopItem
     },
     methods: {
         addToCart(name) {
@@ -76,26 +117,7 @@ Vue.component('SaleItem', {
             }
         }
     },
-    template:`
-<div data-app>
-    <v-card class="mx-auto my-12 item-card" max-width="374">
-        <v-img height="250px" width="350px" :src="item.image"></v-img>
-        <v-card-title><span class="title">{{item.title}}</span></v-card-title>
-        <v-card-text>
-            <v-row align="center" class="mx-0">
-                <div class="grey--text ms-4"></div>
-            </v-row>
-            <div class="my-4 text-subtitle-1">{{item.author}}</div>
-            <div></div>
-        </v-card-text>
-        <v-divider class="mx-4"></v-divider>
-        <v-card-title>$ {{item.price}}</v-card-title>
-        <v-card-subtitle>In Stock: {{item.numInStock}}</v-card-subtitle>
-        <v-card-text> </v-card-text>
-        <v-card-actions>
-            <template>
-                <v-row justify="center">
-                    <v-dialog v-model="dialog" persistent width="600px">
+    template: `<v-dialog v-model="dialog" persistent width="600px">
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn class="card-actions" color="primary" dark v-bind="attrs" v-on="on">More Information</v-btn>
                         </template>
@@ -127,13 +149,8 @@ Vue.component('SaleItem', {
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
-                    </v-dialog>
-                </v-row>
-            </template>
-        </v-card-actions>
-    </v-card>
-</div>`
-});
+                    </v-dialog>`
+})
 
 Vue.component('PopUpList', {
     props: {
@@ -226,7 +243,7 @@ Vue.component('PopUpList', {
             </v-dialog>`
 });
 
-Vue.component('CartItem', {
+const SmallListComponent = Vue.component('CartItem', {
    props: {
         item: {
             type: ShopItem,
@@ -265,27 +282,26 @@ Vue.component('CartItem', {
                         <p class="no">Number in Cart: {{item.numInCart}}</p>
                     </v-card-text>
                     <v-card-actions>
-                    <v-row justify="space-around">
-                        <v-col>
-                            <v-btn class="mx-2 tooltip" fab dark small color="primary" @click="removeItem()">
-                            <v-icon dark>mdi-minus</v-icon>
-                            <p class="tooltiptext">Remove</p>
-                            </v-btn>
-                        </v-col>
-                        <v-col>                          
-                            <v-btn class="ma-5 tooltip" fab dark small color="primary" @click="moveItem()">
-                            <v-icon dark>mdi-playlist-star</v-icon>
-                            <p class="tooltiptext">Add to Wishlist</p>
-                            </v-btn>
-                        </v-col>
-                        <v-col>                          
-                            <v-btn class="ma-5 tooltip" fab dark small color="primary" @click="addItem()">
-                            <v-icon dark>mdi-cart-plus</v-icon>
-                            <p class="tooltiptext">Add to Cart</p>
-                            </v-btn>
-                        </v-col>
-                    </v-row>
-                        
+                        <v-row justify="space-around">
+                            <v-col>
+                                <v-btn class="mx-2 tooltip" fab dark small color="primary" @click="removeItem()">
+                                <v-icon dark>mdi-minus</v-icon>
+                                <p class="tooltiptext">Remove</p>
+                                </v-btn>
+                            </v-col>
+                            <v-col>                          
+                                <v-btn class="ma-5 tooltip" fab dark small color="primary" @click="moveItem()">
+                                <v-icon dark>mdi-playlist-star</v-icon>
+                                <p class="tooltiptext">Add to Wishlist</p>
+                                </v-btn>
+                            </v-col>
+                            <v-col>                          
+                                <v-btn class="ma-5 tooltip" fab dark small color="primary" @click="addItem()">
+                                <v-icon dark>mdi-cart-plus</v-icon>
+                                <p class="tooltiptext">Add to Cart</p>
+                                </v-btn>
+                            </v-col>
+                        </v-row>  
                     </v-card-actions>
                 </v-col>
                 <v-col>
@@ -298,4 +314,3 @@ Vue.component('CartItem', {
     </v-card>
     `
 });
-
