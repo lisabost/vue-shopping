@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21feb3f0-1536-4952-8c8f-fb8a82397bed" name="Changes" comment="">
+    <list default="true" id="21feb3f0-1536-4952-8c8f-fb8a82397bed" name="Changes" comment="---Major Changes---&#10;-Broke Dialog out into separate component from sale list item&#10;-Updated emit functions so add to cart/wish list buttons remain functional&#10;--Minor Changes--&#10;-Added Movies as products in shop">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/app-components.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/app-components.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/app-models.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/app-models.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +47,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../vue-components-starter" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../vue-components-composition" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -83,8 +84,25 @@
       <workItem from="1646174053174" duration="8117000" />
       <workItem from="1646248687001" duration="18000" />
       <workItem from="1646493315440" duration="9149000" />
-      <workItem from="1646582468306" duration="2621000" />
+      <workItem from="1646582468306" duration="4940000" />
+      <workItem from="1646678754302" duration="2612000" />
+      <workItem from="1646690143167" duration="2407000" />
     </task>
+    <task id="LOCAL-00001" summary="---Major Changes---&#10;-Broke Dialog out into separate component from sale list item&#10;-Updated emit functions so add to cart/wish list buttons remain functional&#10;--Minor Changes--&#10;-Added Movies as products in shop">
+      <created>1646585314809</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1646585314809</updated>
+    </task>
+    <task id="LOCAL-00002" summary="---Major Changes---&#10;-Broke Dialog out into separate component from sale list item&#10;-Updated emit functions so add to cart/wish list buttons remain functional&#10;--Minor Changes--&#10;-Added Movies as products in shop">
+      <created>1646585352042</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1646585352042</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -100,5 +118,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="---Major Changes---&#10;-Broke Dialog out into separate component from sale list item&#10;-Updated emit functions so add to cart/wish list buttons remain functional&#10;--Minor Changes--&#10;-Added Movies as products in shop" />
+    <option name="LAST_COMMIT_MESSAGE" value="---Major Changes---&#10;-Broke Dialog out into separate component from sale list item&#10;-Updated emit functions so add to cart/wish list buttons remain functional&#10;--Minor Changes--&#10;-Added Movies as products in shop" />
   </component>
 </project>

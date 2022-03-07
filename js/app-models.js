@@ -31,11 +31,9 @@ class Book extends ShopItem{
 }
 
 class Bookmark extends ShopItem{
-    material;
 
-    constructor(id, title, description, price, numInStock, image, numInCart, material) {
+    constructor(id, title, description, price, numInStock, image, numInCart) {
         super(id, title, description, price, numInStock, image, numInCart);
-        this.material = material;
     }
 }
 

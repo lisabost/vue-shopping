@@ -14,7 +14,7 @@ const app = new Vue({
     // methods: usually "events" triggered by v-on:
     methods: {
         removeIt: function (item){
-            // change cart/wish depending on what list it was in
+            // if there are more than one in the cart remove one, otherwise remove item all together
             if (this.cartList.indexOf(item) >= 0) {
                 if (this.cartList[this.cartList.indexOf(item)].numInCart > 1)
                 {
@@ -25,8 +25,8 @@ const app = new Vue({
                     this.cartList.splice(this.cartList.indexOf(item), 1);
                     this.item.numInStock++;
                 }
-
             }
+            // if it is in the wishlist remove item
             if (this.wishList.indexOf(item) >= 0) {
                 this.wishList.splice(this.wishList.indexOf(item), 1);
             }
@@ -44,17 +44,10 @@ const app = new Vue({
             }
             else {
                 if (this.wishList.indexOf(item) >= 0) {
-                    if (this.cartList.indexOf(item) >= 0) {
-                        this.cartList[this.cartList.indexOf(item)].numInCart++;
-                    }
-                    else {
-                        this.cartList.push(item);
-                        this.cartList[this.cartList.indexOf(item)].numInCart++;
-                    }
-                this.wishList.splice(this.wishList.indexOf(item), 1);
+                    this.addToCart(item);
+                    this.wishList.splice(this.wishList.indexOf(item), 1);
                 }
             }
-
         },
         addToCart: function (item) {
             if (this.cartList.indexOf(item) >= 0) {
@@ -64,7 +57,6 @@ const app = new Vue({
                 this.cartList.push(item);
                 this.cartList[this.cartList.indexOf(item)].numInCart++;
             }
-
         },
         addToWishList: function (item) {
             this.wishList.push(item);

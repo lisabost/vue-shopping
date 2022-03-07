@@ -55,29 +55,28 @@ const ShopComponent = Vue.component('Shop', {
 
 
 const SaleItemComponent = Vue.component('SaleItem', {
-    props: {
-        item: {
-            type: ShopItem
+    props: {item: ShopItem},
+    computed: {
+        typeOfItem() {
+            return this.item.constructor.name;
+        }
         },
-    },
-    methods: {
-
-    },
     template:`
 <div data-app>
     <v-card class="mx-auto my-12 item-card" max-width="374">
-        <v-img height="250px" width="350px" :src="item.image"></v-img>
-        <v-card-title><span class="title">{{item.title}}</span></v-card-title>
-        <v-card-text>
-            <v-row align="center" class="mx-0">
-                <div class="grey--text ms-4"></div>
-            </v-row>
-            <div class="my-4 text-subtitle-1">{{item.author}}</div>
-            <div></div>
-        </v-card-text>
-        <v-card-title>$ {{item.price}}</v-card-title>
-        <v-card-subtitle>In Stock: {{item.numInStock}}</v-card-subtitle>
-        <v-card-text> </v-card-text>
+<!--        <v-img height="250px" width="350px" :src="item.image"></v-img>-->
+<!--        <v-card-title><span class="title">{{item.title}}</span></v-card-title>-->
+<!--        <v-card-text>-->
+<!--            <v-row align="center" class="mx-0">-->
+<!--                <div class="grey&#45;&#45;text ms-4"></div>-->
+<!--            </v-row>-->
+<!--            <div class="my-4 text-subtitle-1">{{item.author}}</div>-->
+<!--            <div></div>-->
+<!--        </v-card-text>-->
+<!--        <v-card-title>$ {{item.price}}</v-card-title>-->
+<!--        <v-card-subtitle>In Stock: {{item.numInStock}}</v-card-subtitle>-->
+<!--        <v-card-text> </v-card-text>-->
+        <component :is="typeOfItem" :item="item"></component>
         <v-card-actions>
             <template>
                 <v-row justify="center">
@@ -88,6 +87,56 @@ const SaleItemComponent = Vue.component('SaleItem', {
         </v-card-actions>
     </v-card>
 </div>`
+});
+
+const BookSaleItem = Vue.component('Book', {
+    extends: SaleItemComponent,
+    template: `<div>
+                    <v-img height="250px" width="350px" :src="item.image"></v-img>
+                    <v-card-title><span class="title">{{item.title}}</span></v-card-title>
+                    <v-card-text>
+                        <v-row align="center" class="mx-0">
+                            <div class="grey--text ms-4"></div>
+                        </v-row>
+                        <v-card-subtitle class="my-4" v-if="item.author">{{item.author}}</v-card-subtitle>
+                        <div></div>
+                    </v-card-text>
+                    <v-card-title>$ {{item.price}}</v-card-title>
+                    <v-card-subtitle>In Stock: {{item.numInStock}}</v-card-subtitle>
+                    <v-card-text> </v-card-text>
+                </div>`
+});
+
+const MovieSaleItem = Vue.component('Movie', {
+    extends: SaleItemComponent,
+    template: `
+<div><v-img height="250px" width="350px" :src="item.image"></v-img>
+                    <v-card-title><span class="title">{{item.title}}</span></v-card-title>
+                    <v-card-text>
+                        <v-row align="center" class="mx-0">
+                            <div class="grey--text ms-4"></div>
+                        </v-row>
+                        <v-card-subtitle class="my-4" v-if="item.format">Format: {{item.format}}</v-card-subtitle>
+                        <div></div>
+                    </v-card-text>
+                    <v-card-title>$ {{item.price}}</v-card-title>
+                    <v-card-subtitle>In Stock: {{item.numInStock}}</v-card-subtitle>
+                    <v-card-text> </v-card-text></div>`
+});
+const BookmarkSaleItem = Vue.component('Bookmark', {
+    extends: SaleItemComponent,
+    template: `<div><v-img height="250px" width="350px" :src="item.image"></v-img>
+                    <v-card-title><span class="title">{{item.title}}</span></v-card-title>
+                    <v-card-text>
+                        <v-row align="center" class="mx-0">
+                            <div class="grey--text ms-4"></div>
+                        </v-row>
+                        <v-card-subtitle class="my-4" v-if="item.material">Material: {{item.material}}</v-card-subtitle>
+                        <div></div>
+                    </v-card-text>
+                    <v-card-title>$ {{item.price}}</v-card-title>
+                    <v-card-subtitle>In Stock: {{item.numInStock}}</v-card-subtitle>
+                    <v-card-text> </v-card-text></div>`
 });
 
 Vue.component('ProductDetails', {
@@ -129,7 +178,6 @@ Vue.component('ProductDetails', {
                             <v-card-text>
                                 <v-container>
                                     <p class="text-h5">Written by: {{item.author}}</p>
-                                    <p class="text-h5">Illustrated by: {{item.illustrator}}</p>
                                     <br>
                                     <p>{{item.description}}</p>
                                     <br>
